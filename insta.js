@@ -61,15 +61,18 @@ const evenlyChunks = (inc, max) => {
 // descriptive statistics function to be applied on certain fields of the array of json posts
 const descStats = (arr, ndigits) => {
 
+    const med = stats.median(arr);
+
     var objOut = {
         min: _.min(arr),
         q1: stats.percentile(arr, 0.25),
-        median: stats.median(arr),
+        median: med,
         mean: _.mean(arr),
         q3: stats.percentile(arr, 0.75),
         max: _.max(arr),
         stdev: stats.stdev(arr),
-        iqr: (stats.percentile(arr, 0.75) - stats.percentile(arr, 0.25))
+        iqr: (stats.percentile(arr, 0.75) - stats.percentile(arr, 0.25)),
+        mad: stats.median(arr.map(val => { return Math.abs(val - med); }))
     };
 
     Object.keys(objOut).forEach(key => {
@@ -165,7 +168,7 @@ const instaService = {
                     postStats: {
                         totalSamples: posts.length,
                         daysInterval: Math.ceil(daysInterval),
-                        avgPostsPerWeek: Math.round(posts.length * 6.048E8 * 7.0 / msInterval),
+                        avgPostsPerWeek: Math.round(posts.length / weeksInterval),
                         avgLikesPerWeek: Math.round(_.sum(likes) / weeksInterval),
                         avgCommentsPerWeek:  Math.round(_.sum(comments) / weeksInterval),
                         likesPerPost: descStats(likes),
