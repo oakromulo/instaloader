@@ -14,8 +14,8 @@ const msBetweenDates = (d1, d2) => { return Math.abs(d1.getTime() - d2.getTime()
 // decode instagram json user data
 const toProfileInfo = user => {
     return {
-        userName: user.username,
-        fullName: user.full_name,
+        username: user.username,
+        fullname: user.full_name,
         isVerified: user.is_verified,
         picUrl: user.profile_pic_url,
         picUrlHd: user.profile_pic_url_hd,
@@ -172,7 +172,7 @@ const instaService = {
                     profileInfo: profileInfo,
                     postStats: {
                         totalSamples: posts.length,
-                        daysInterval: Math.ceil(daysInterval),
+                        daysInterval: Math.round(daysInterval),
                         avgPostsPerWeek: Math.round(posts.length / weeksInterval),
                         avgLikesPerWeek: Math.round(_.sum(likes) / weeksInterval),
                         avgCommentsPerWeek:  Math.round(_.sum(comments) / weeksInterval),

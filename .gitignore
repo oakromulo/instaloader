@@ -40,3 +40,5 @@ ext.json
 
 .jscsrc
 .jshintrc
+
+output.csv

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Romulo-FanHero/instaloader#readme",
   "dependencies": {
     "bluebird": "^3.4.7",
+    "json2csv": "^3.7.3",
     "lodash": "^4.17.4",
     "request": "^2.79.0",
     "stats-lite": "^2.0.3"
