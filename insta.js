@@ -62,16 +62,21 @@ const evenlyChunks = (inc, max) => {
 const descStats = (arr, ndigits) => {
 
     const med = stats.median(arr);
+    const q1 = stats.percentile(arr, 0.25);
+    const q3 = stats.percentile(arr, 0.75);
+    const iqr = q3 - q1;
 
     var objOut = {
         min: _.min(arr),
-        q1: stats.percentile(arr, 0.25),
+        linf: q1 - 1.5 * iqr,
+        q1: q1,
         median: med,
         mean: _.mean(arr),
-        q3: stats.percentile(arr, 0.75),
+        q3: q3,
+        lsup: q3 + 1.5 * iqr,
         max: _.max(arr),
+        iqr: iqr,
         stdev: stats.stdev(arr),
-        iqr: (stats.percentile(arr, 0.75) - stats.percentile(arr, 0.25)),
         mad: stats.median(arr.map(val => { return Math.abs(val - med); }))
     };
 
