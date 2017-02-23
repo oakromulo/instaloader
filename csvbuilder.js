@@ -38,6 +38,7 @@ const csvBuild = () => {
                     insta_profile: result.profileInfo.username,
                     insta_posts_last_90d: result.postStats.totalSamples,
                     insta_avg_posts_per_week: result.postStats.avgPostsPerWeek,
+                    insta_avg_likes_per_week: result.postStats.avgLikesPerWeek,
                     insta_avg_comments_per_week: result.postStats.avgCommentsPerWeek,
                     insta_likes_per_post_q1: result.postStats.likesPerPost.q1,
                     insta_likes_per_post_q2: result.postStats.likesPerPost.median,
