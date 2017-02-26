@@ -20,7 +20,14 @@ const PROFILES = [
     'filipetoledo',
     'zsuzsubell',
     'swimmac_1977',
-    'heliocastroneves'
+    'heliocastroneves',
+    'florida_cup',
+    'bruninhoedavi',
+    'theblurbarbosa',
+    'dns_kmn',
+    'ccrestauracao',
+    'jeniffer_nascimento',
+    'orlandocitys'
 ];
 
 const csvBuild = () => {
