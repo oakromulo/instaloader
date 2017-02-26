@@ -24,7 +24,7 @@ const PROFILES = [
     'florida_cup',
     'bruninhoedavi',
     'theblurbarbosa',
-    'dns_kmn',
+    //'dns_kmn',
     'ccrestauracao',
     'jeniffer_nascimento',
     'orlandocitys'
@@ -43,6 +43,8 @@ const csvBuild = () => {
                 console.log(profile, 'finished');
                 return {
                     insta_profile: result.profileInfo.username,
+                    is_verified: result.profileInfo.isVerified,
+                    /*
                     insta_posts_last_90d: result.postStats.totalSamples,
                     insta_avg_posts_per_week: result.postStats.avgPostsPerWeek,
                     insta_avg_likes_per_week: result.postStats.avgLikesPerWeek,
@@ -51,7 +53,9 @@ const csvBuild = () => {
                     insta_likes_per_post_q2: result.postStats.likesPerPost.median,
                     insta_likes_per_post_q3: result.postStats.likesPerPost.q3,
                     insta_likes_per_follower_q1: Math.round(result.postStats.percentLikesPerFollower.q1 * 10000),
+                    */
                     insta_likes_per_follower_q2: Math.round(result.postStats.percentLikesPerFollower.median * 10000),
+                    /*
                     insta_likes_per_follower_q3: Math.round(result.postStats.percentLikesPerFollower.q3 * 10000),
                     insta_comments_per_post_q1: result.postStats.commentsPerPost.q1,
                     insta_comments_per_post_q2: result.postStats.commentsPerPost.median,
@@ -60,8 +64,9 @@ const csvBuild = () => {
                     insta_comments_per_follower_q2: Math.round(result.postStats.percentCommentsPerFollower.median * 10000),
                     insta_comments_per_follower_q3: Math.round(result.postStats.percentCommentsPerFollower.q3 * 10000),
                     insta_hours_between_posts_q1: Math.round(result.postStats.hoursBetweenPosts.q1 * 10000),
-                    insta_hours_between_posts_q2: Math.round(result.postStats.hoursBetweenPosts.median * 10000),
-                    insta_hours_between_posts_q3: Math.round(result.postStats.hoursBetweenPosts.q3 * 10000)
+                    */
+                    insta_hours_between_posts_q2: Math.round(result.postStats.hoursBetweenPosts.median * 10000)/*,
+                    insta_hours_between_posts_q3: Math.round(result.postStats.hoursBetweenPosts.q3 * 10000)*/
                 };
             });
     })
