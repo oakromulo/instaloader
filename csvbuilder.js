@@ -27,7 +27,7 @@ const PROFILES = [
     //'dns_kmn',
     'ccrestauracao',
     'jeniffer_nascimento',
-    'orlandocitys'
+    'orlandocitysc'
 ];
 
 const csvBuild = () => {
