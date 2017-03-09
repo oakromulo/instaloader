@@ -11,6 +11,7 @@ const MAX_DAYS = 90;
 const MAX_POSTS = 2000;
 
 const PROFILES = [
+    /*
     'vascodagama',
     'therealbigsmo',
     'ludmilla',
@@ -24,10 +25,16 @@ const PROFILES = [
     'florida_cup',
     'bruninhoedavi',
     'theblurbarbosa',
-    //'dns_kmn',
     'ccrestauracao',
     'jeniffer_nascimento',
     'orlandocitysc'
+    */
+    'abdevilliers17',
+    'djfreshsa',
+    'noeliaofficial',
+    'alinebarreto_oficial',
+    'jessekriel15',
+    'corinthians'
 ];
 
 const csvBuild = () => {
@@ -42,8 +49,9 @@ const csvBuild = () => {
             .then(result => {
                 console.log(profile, 'finished');
                 return {
-                    insta_profile: result.profileInfo.username,
+                    profile: result.profileInfo.username,
                     is_verified: result.profileInfo.isVerified,
+                    followers: result.profileInfo.followersCount,
                     /*
                     insta_posts_last_90d: result.postStats.totalSamples,
                     insta_avg_posts_per_week: result.postStats.avgPostsPerWeek,
@@ -54,7 +62,7 @@ const csvBuild = () => {
                     insta_likes_per_post_q3: result.postStats.likesPerPost.q3,
                     insta_likes_per_follower_q1: Math.round(result.postStats.percentLikesPerFollower.q1 * 10000),
                     */
-                    insta_likes_per_follower_q2: Math.round(result.postStats.percentLikesPerFollower.median * 10000),
+                    insta_likes_per_follower_q2: /*Math.round(*/result.postStats.percentLikesPerFollower.median/* * 10000)*/,
                     /*
                     insta_likes_per_follower_q3: Math.round(result.postStats.percentLikesPerFollower.q3 * 10000),
                     insta_comments_per_post_q1: result.postStats.commentsPerPost.q1,
@@ -65,8 +73,14 @@ const csvBuild = () => {
                     insta_comments_per_follower_q3: Math.round(result.postStats.percentCommentsPerFollower.q3 * 10000),
                     insta_hours_between_posts_q1: Math.round(result.postStats.hoursBetweenPosts.q1 * 10000),
                     */
-                    insta_hours_between_posts_q2: Math.round(result.postStats.hoursBetweenPosts.median * 10000)/*,
-                    insta_hours_between_posts_q3: Math.round(result.postStats.hoursBetweenPosts.q3 * 10000)*/
+                    insta_hours_between_posts_q2: /*Math.round(*/result.postStats.hoursBetweenPosts.median/* * 10000)*/,
+                    /*
+                    insta_hours_between_posts_q3: Math.round(result.postStats.hoursBetweenPosts.q3 * 10000),
+                    */
+                    lpf: result.predictions.lpf,
+                    hbp: result.predictions.hbp,
+                    r30d: result.predictions.r30d,
+                    d30d: result.predictions.d30d
                 };
             });
     })

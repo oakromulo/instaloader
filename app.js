@@ -3,7 +3,7 @@
 const instaService = require('./insta.js');
 
 const instaQry = {
-    profile: 'vascodagama',
+    profile: 'abdevilliers17',
     digits: 4,
     maxDays: 90,
     maxPosts: 500,

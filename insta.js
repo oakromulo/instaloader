@@ -168,20 +168,56 @@ const instaService = {
                 const comments = _.map(posts, 'commentCount');
                 const comments100 = comments.map(val => { return val * 100.0 / profileInfo.followersCount; });
 
+                const postStats = {
+                    totalSamples: posts.length,
+                    daysInterval: Math.round(daysInterval),
+                    avgPostsPerWeek: Math.round(posts.length / weeksInterval),
+                    avgLikesPerWeek: Math.round(_.sum(likes) / weeksInterval),
+                    avgCommentsPerWeek:  Math.round(_.sum(comments) / weeksInterval),
+                    likesPerPost: descStats(likes),
+                    percentLikesPerFollower: descStats(likes100, 4),
+                    commentsPerPost: descStats(comments),
+                    percentCommentsPerFollower: descStats(comments100, 4),
+                    hoursBetweenPosts: descStats(dts, 4)
+                };
+
+                var lpf = Math.max( // min for worst-case, max for best-case
+                    postStats.percentLikesPerFollower.median,
+                    postStats.percentLikesPerFollower.mean
+                );
+                lpf = lpf > 5 ? 5 : lpf;
+                lpf = lpf < 0.2 ? 0.2 : lpf;
+
+                var hbp = Math.min( // min for best-case, max for worst-casse
+                    postStats.hoursBetweenPosts.median,
+                    postStats.hoursBetweenPosts.mean
+                );
+                hbp = hbp > 120 ? 120 : hbp;
+                hbp = hbp < 0.5 ? 0.5 : hbp;
+
+                /*
+                    Down_30d
+                    Likes            4.88E-3
+                    Hours bet posts  2.39E-3
+                    Constant        -1.01E-3
+
+                    Reg_30d
+                    Likes            2.89E-3
+                    Hours bet posts  1.93E-3
+                    Constant        -9.53E-4
+                 */
+
+                const predictions = {
+                    lpf: lpf,
+                    hbp: hbp,
+                    r30d: Math.round(profileInfo.followersCount * (2.89E-3 * lpf + 1.93E-3 / hbp - 9.53E-4)),
+                    d30d: Math.round(profileInfo.followersCount * (4.88E-3 * lpf + 2.39E-3 / hbp - 1.01E-3))
+                };
+
                 return {
                     profileInfo: profileInfo,
-                    postStats: {
-                        totalSamples: posts.length,
-                        daysInterval: Math.round(daysInterval),
-                        avgPostsPerWeek: Math.round(posts.length / weeksInterval),
-                        avgLikesPerWeek: Math.round(_.sum(likes) / weeksInterval),
-                        avgCommentsPerWeek:  Math.round(_.sum(comments) / weeksInterval),
-                        likesPerPost: descStats(likes),
-                        percentLikesPerFollower: descStats(likes100, 4),
-                        commentsPerPost: descStats(comments),
-                        percentCommentsPerFollower: descStats(comments100, 4),
-                        hoursBetweenPosts: descStats(dts, 4)
-                    }
+                    postStats: postStats,
+                    predictions: predictions
                 };
 
             })
